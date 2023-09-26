@@ -1,0 +1,24 @@
+[package]
+name = "sparse-net"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "test"
+path = "bin/test.rs"
+
+[[bin]]
+name = "script"
+path = "bin/script.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.8.5"
+ndarray = "0.15.6"
+
+[dev-dependencies]
+criterion = { version = "0.4", features = ["html_reports"] }

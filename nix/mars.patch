@@ -1,0 +1,71 @@
+diff --git a/dijkstra.c b/dijkstra.c
+index c04b4c0..1ce972c 100644
+--- a/dijkstra.c
++++ b/dijkstra.c
+@@ -14,6 +14,7 @@
+  */
+ 
+ #include "dijkstra.h"
++#include "graph.h"
+ 
+ static double getlength(Agedge_t * e)
+ {
+diff --git a/dijkstra.h b/dijkstra.h
+index 935d345..2460393 100644
+--- a/dijkstra.h
++++ b/dijkstra.h
+@@ -19,7 +19,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <graphviz/cgraph.h>
+-#include "graph.h"
+ 
+ double* dijkstra(Agraph_t* g, Agnode_t* n);
+ 
+diff --git a/graph.c b/graph.c
+index a297c89..22fb4c1 100644
+--- a/graph.c
++++ b/graph.c
+@@ -17,6 +17,11 @@
+ 
+ static Agnode_t** nodes;
+ 
++Agsym_t* weight;
++Agsym_t* pos;
++Agsym_t* color; 
++Agsym_t* comment;
++
+ void init_graph(Agraph_t* g)
+ {
+     int i = 0;
+diff --git a/graph.h b/graph.h
+index 19f4b5b..77b0651 100644
+--- a/graph.h
++++ b/graph.h
+@@ -28,10 +28,10 @@ typedef struct
+     double dist;
+ } nodedata_t; 
+ 
+-Agsym_t* weight;
+-Agsym_t* pos;
+-Agsym_t* color; 
+-Agsym_t* comment;
++extern Agsym_t* weight;
++extern Agsym_t* pos;
++extern Agsym_t* color; 
++extern Agsym_t* comment;
+ 
+ #define getdist(n) (((nodedata_t*)((n)->base.data))->dist)
+ #define setdist(n,d) (((nodedata_t*)((n)->base.data))->dist = (d))
+diff --git a/layout.c b/layout.c
+index 18c74e4..36e8657 100644
+--- a/layout.c
++++ b/layout.c
+@@ -14,6 +14,7 @@
+  */
+ 
+ #include "layout.h"
++#include "graph.h"
+ 
+ /*Lapack declarations */
+ void dgesvd_(const char* jobu, const char* jobvt, const int* M, const int* N,
